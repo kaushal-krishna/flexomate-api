@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const apiUrl = 'http://localhost:3000/users/search/john'; // Replace with your actual API endpoint
+const apiUrl = 'https://flexomate-api.cyclic.app/users/search/john'; // Replace with your actual API endpoint
 
 axios.get(apiUrl)
   .then((response) => {
