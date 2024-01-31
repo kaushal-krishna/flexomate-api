@@ -25,18 +25,23 @@ MongoClient.connect(mongoURL)
     // CRUD operations
 
     // Create
-    app.post('/users', async (req, res) => {
-      const { username, email } = req.body;
+    // Function to insert user data
+    const insertUserData = async (userData) => {
       const collection = db.collection(collectionName);
-
       try {
-        const result = await collection.insertOne({ username, email });
-        res.status(200).json({ message: 'User Created Successfully!' });
+        const result = await collection.insertOne(userData);
+        console.log('User Created Successfully!');
       } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error('Error creating user:', error.message);
       }
-    });
+    };
 
+    // Create endpoint using the function
+    app.post('/users', async (req, res) => {
+      const userData = req.body;
+      insertUserData(userData);
+      res.status(200).json({ message: 'User creation initiated!' });
+    });
     // Read all
     app.get('/users', async (req, res) => {
       const collection = db.collection(collectionName);
