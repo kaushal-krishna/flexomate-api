@@ -3,9 +3,8 @@ const { MongoClient, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 443;
-const mongoURL = process.env.MONGO_URL ||
-'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
+const PORT = 443;
+const mongoURL = 'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
 // Use environmental variable or default value
 const dbName = 'flexomate_db';
 const collectionName = 'users';
