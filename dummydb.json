@@ -1,0 +1,93 @@
+{
+  "id": 43211234,
+  "name": {
+    "first": "John",
+    "last": "Doe"
+  },
+  "username": "john.doe123",
+  "email": {
+    "primary": "johndoe123@abc.net",
+    "secondary": "johndoe@abc.bz"
+  },
+  "gender": "male",
+  "age": 30,
+  "account": {
+    "type": "personal",
+    "public": false,
+    "status": "active"
+  },
+  "images": {
+    "profile": {
+      "src": "https://0.gravatar.com/avatar/f18370ec3562e3cd21fa469e2b582bd741115e5fd8b094c34d952a5871562a87?size=512",
+      "width": 400,
+      "height": 400
+    },
+    "banner": {
+      "src": "https://miro.medium.com/v2/resize:fit:828/format:webp/1*92adf06PCF91kCYu1nPLQg.jpeg",
+      "width": 728,
+      "height": 270
+    }
+  },
+  "collection": {
+    "id": 128265169159425
+  },
+  "connections": {
+    "mates": {
+      "totalCount": 2,
+      "items": [
+        {
+          "id": 84485327,
+          "following": true,
+          "follower": false,
+          "isClose": true,
+          "chat": {
+            "id": 432658765294515
+          }
+        },
+        {
+          "id": 56734598,
+          "following": false,
+          "follower": true,
+          "isClose": true,
+          "chat": {
+            "id": 456987136597426
+          }
+        }
+      ]
+    },
+    "following": {
+      "totalCount": 2,
+      "items": [
+        {
+          "id": 65278489,
+          "mate": false,
+          "follower": true,
+          "isClose": false
+        },
+        {
+          "id": 58293890,
+          "mate": false,
+          "follower": false,
+          "isClose": true
+        }
+      ]
+    },
+    "followers": {
+      "totalCount": 2,
+      "items": [
+        {
+          "id": 12389042,
+          "mate": false,
+          "following": false,
+          "isClose": true
+        },
+        {
+          "id": 23903781,
+          "mate": false,
+          "following": false,
+          "isClose": true
+        }
+      ]
+    }
+  }
+}
