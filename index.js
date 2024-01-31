@@ -49,6 +49,24 @@ MongoClient.connect(mongoURL)
       }
     });
 
+    // Read user by ID
+app.get('/users/id/:id', async (req, res) => {
+  const { id } = req.params;
+  const collection = db.collection(collectionName);
+
+  try {
+    const user = await collection.findOne({ _id: new ObjectId(id) });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});    
+
     // Read user by username
     app.get('/users/:username', async (req, res) => {
       const { username } = req.params;
@@ -57,7 +75,7 @@ MongoClient.connect(mongoURL)
       try {
         const user = await collection.findOne({ username });
 
-        res.json(user);
+        res.status(200).json(user);
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
@@ -90,7 +108,7 @@ MongoClient.connect(mongoURL)
       { returnDocument: 'after' }
     );
 
-    res.json({ message: 'User Updated Successfully!' });
+    res.status(200).json({ message: 'User Updated Successfully!' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
@@ -105,7 +123,7 @@ MongoClient.connect(mongoURL)
       try {
         const result = await collection.findOneAndDelete({ _id: new ObjectId(id) });
 
-        res.json({ message: 'User Deleted Successfully!' });
+        res.status(200).json({ message: 'User Deleted Successfully!' });
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
