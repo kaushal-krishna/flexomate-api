@@ -6,10 +6,10 @@ const {
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 443;
 const mongoURL =
-'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/test?retryWrites=true&w=majority';
-const dbName = 'test';
+'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
+const dbName = 'flexomate_db';
 const collectionName = 'users';
 
 app.use(bodyParser.json());
