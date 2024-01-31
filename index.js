@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 let db;
 
 // Connect to MongoDB
-MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
+MongoClient.connect(mongoURL)
   .then((client) => {
     console.log('Connected to MongoDB');
     db = client.db(dbName);
