@@ -1,31 +1,29 @@
+// app.js
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT_USERS_API = 3000;
+const PORT_COLLECTIONS_API = 3001;
 const mongoURL = 'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
-const dbName = 'flexomate_db';
-const usersCollection = 'users';
-const librariesCollection = 'libraries';
 
 app.use(bodyParser.json());
 
 let db;
 
 // Connect to MongoDB
-MongoClient.connect(mongoURL)
+MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((client) => {
     console.log('Connected to MongoDB');
-    db = client.db(dbName);
+    db = client.db('flexomate_db');
 
-    // CRUD operations: Users
+    // Users API - CRUD Operations
 
-    // Create User
+    // Create a new user
     app.post('/users', async (req, res) => {
       try {
-        const result = await db.collection(usersCollection).insertOne(req.body);
-        console.log('User Created Successfully!');
+        await db.collection('users').insertOne(req.body);
         res.status(200).json({ message: 'User creation initiated!' });
       } catch (error) {
         console.error('Error creating user:', error.message);
@@ -33,62 +31,73 @@ MongoClient.connect(mongoURL)
       }
     });
 
-    // Read All Users
+    // Get all users
     app.get('/users', async (req, res) => {
       try {
-        const users = await db.collection(usersCollection).find().toArray();
+        const users = await db.collection('users').find().toArray();
         res.status(200).json(users);
       } catch (error) {
-        res.status(500).json({ message: 'Failed to retrieve users.' });
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // Read User by ID
-    app.get('/users/id/:id', async (req, res) => {
+    // Get user by username
+    app.get('/users/:username', async (req, res) => {
+      const { username } = req.params;
       try {
-        const user = await db.collection(usersCollection).findOne({ _id: new ObjectId(req.params.id) });
-        if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-        }
-        res.status(200).json(user);
+        const user = await db.collection('users').findOne({ username });
+        res.json(user);
       } catch (error) {
-        res.status(500).json({ message: 'Failed to retrieve user.' });
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // Update User
-    app.patch('/users/:id', async (req, res) => {
+    // Search users by partial username match
+    app.get('/users/search/:partialUsername', async (req, res) => {
+      const { partialUsername } = req.params;
       try {
-        const result = await db.collection(usersCollection).findOneAndUpdate(
-          { _id: new ObjectId(req.params.id) },
-          { $set: req.body },
+        const regex = new RegExp(partialUsername, 'i');
+        const users = await db.collection('users').find({ username: { $regex: regex } }).toArray();
+        res.status(200).json(users);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    });
+
+    // Update user information
+    app.patch('/users/:id', async (req, res) => {
+      const { id } = req.params;
+      const { username, email } = req.body;
+      try {
+        const result = await db.collection('users').findOneAndUpdate(
+          { _id: new ObjectId(id) },
+          { $set: { username, email } },
           { returnDocument: 'after' }
         );
-        res.status(200).json({ message: 'User Updated Successfully!' });
+        res.json({ message: 'User Updated Successfully!' });
       } catch (error) {
-        console.error('Error updating user:', error.message);
-        res.status(500).json({ message: 'User update failed.' });
+        console.error(error);
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // Delete User
+    // Delete user by ID
     app.delete('/users/:id', async (req, res) => {
+      const { id } = req.params;
       try {
-        const result = await db.collection(usersCollection).findOneAndDelete({ _id: new ObjectId(req.params.id) });
-        res.status(200).json({ message: 'User Deleted Successfully!' });
+        const result = await db.collection('users').findOneAndDelete({ _id: new ObjectId(id) });
+        res.json({ message: 'User Deleted Successfully!' });
       } catch (error) {
-        console.error('Error deleting user:', error.message);
-        res.status(500).json({ message: 'User deletion failed.' });
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // CRUD operations: Libraries
+    // Collections API - CRUD Operations
 
-    // Create Library
+    // Create a new library
     app.post('/libraries', async (req, res) => {
       try {
-        const result = await db.collection(librariesCollection).insertOne(req.body);
-        console.log('Library Created Successfully!');
+        await db.collection('libraries').insertOne(req.body);
         res.status(200).json({ message: 'Library creation initiated!' });
       } catch (error) {
         console.error('Error creating library:', error.message);
@@ -96,31 +105,34 @@ MongoClient.connect(mongoURL)
       }
     });
 
-    // Read All Libraries
+    // Get all libraries
     app.get('/libraries', async (req, res) => {
       try {
-        const libraries = await db.collection(librariesCollection).find().toArray();
+        const libraries = await db.collection('libraries').find().toArray();
         res.status(200).json(libraries);
       } catch (error) {
-        res.status(500).json({ message: 'Failed to retrieve libraries.' });
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // Read Library by ID
-    app.get('/libraries/id/:id', async (req, res) => {
+    // Get library by ID
+    app.get('/libraries/:id', async (req, res) => {
+      const { id } = req.params;
       try {
-        const library = await db.collection(librariesCollection).findOne({ _id: new ObjectId(req.params.id) });
+        const library = await db.collection('libraries').findOne({ _id: new ObjectId(id) });
+
         if (!library) {
           return res.status(404).json({ message: 'Library not found' });
         }
+
         res.status(200).json(library);
       } catch (error) {
-        res.status(500).json({ message: 'Failed to retrieve library.' });
+        res.status(500).json({ message: error.message });
       }
     });
 
-    // Root Endpoint
-    app.get('/', (req, res) => {
+    // Root endpoint
+    app.get('/', async (req, res) => {
       res.status(200).json({ message: 'API Server is working fine!' });
     });
 
@@ -130,9 +142,16 @@ MongoClient.connect(mongoURL)
       res.status(500).json({ message: 'Something went wrong!' });
     });
 
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+    // Users API Server
+    app.listen(PORT_USERS_API, () => {
+      console.log(`Users API Server is running on port ${PORT_USERS_API}`);
     });
+
+    // Collections API Server
+    app.listen(PORT_COLLECTIONS_API, () => {
+      console.log(`Collections API Server is running on port ${PORT_COLLECTIONS_API}`);
+    });
+
   })
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
