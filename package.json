@@ -1,10 +1,10 @@
 {
   "name": "flexomate-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Official Flexomate API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm install"
   },
   "author": "Florixer Inc.",
   "license": "ISC",
