@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const { MongoClient, ObjectId } = require('mongodb');
+const cors = require("cors");
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -8,8 +9,8 @@ const PORT_USERS_API = 3000;
 const PORT_COLLECTIONS_API = 3001;
 const mongoURL = 'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
 
+app.use(cors());
 app.use(bodyParser.json());
-
 let db;
 
 // Connect to MongoDB
