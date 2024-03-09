@@ -4,7 +4,7 @@
   "description": "The Official Flexomate API",
   "main": "index.js",
   "scripts": {
-    "start": "npm install"
+    "start": "node index.js"
   },
   "author": "Florixer Inc.",
   "license": "ISC",
