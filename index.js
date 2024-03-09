@@ -1,5 +1,6 @@
 // app.js
 const express = require('express');
+const axios = require('axios');
 const { MongoClient, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
 
@@ -130,6 +131,31 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
         res.status(500).json({ message: error.message });
       }
     });
+
+    app.get('/spotify/download/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const externalApiResponse = await axios.get(`https://api.spotifydown.com/download/${id}`, 
+                                               headers: { 'Accept': '*/*',
+  'Accept-Encoding': 'gzip, deflate, br',
+  'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
+  'Origin': 'https://spotifydown.com',
+  'Referer': 'https://spotifydown.com/',
+  'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120"',
+  'Sec-Ch-Ua-Mobile': '?1',
+  'Sec-Ch-Ua-Platform': '"Android"',
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-site',
+  'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',});
+    
+    // Send the external API response as your API response
+    res.json(externalApiResponse.data);
+  } catch (error) {
+    console.error('Error making external API request:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
     // Root endpoint
     app.get('/', async (req, res) => {
