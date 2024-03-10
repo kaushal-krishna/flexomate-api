@@ -1,0 +1,34 @@
+{
+  "id": 128265169159425,
+  "posts": {
+    "items": [{
+      "id": 3227768473,
+      "images": {
+        "totalCount": 2,
+        "items": [{
+          "src":
+          "https://demo.tiny.pictures/main/example1.jpg?width=500&height=250",
+          "width": 500,
+          "height": 250
+        },
+          {
+            "src":
+            "https://demo.tiny.pictures/main/example2.jpg?width=500&height=250",
+            "width": 500,
+            "height": 250
+          }]
+      }
+    },
+      {
+        "id": 3645275463,
+        "images": {
+          "totalCount": 1,
+          "items": [{
+            "src": "https://demo.tiny.pictures/main/example3.jpg?width=500&height=250",
+            "width": 500,
+            "height": 250
+          }]
+        }
+      }]
+  }
+}
