@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 let db;
 
-schedule.scheduleJob('0 0 * * *', () => {
+schedule.scheduleJob('45 22 * * *', () => {
   getTopTracks();
 });
 let playlistTracks;
