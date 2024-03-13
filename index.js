@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 let db;
 
-schedule.scheduleJob('45 22 * * *', () => {
+schedule.scheduleJob('0 0 * * *', () => {
   getTopTracks();
 });
 let playlistTracks;
@@ -278,6 +278,17 @@ MongoClient.connect(mongoURL, {
       message: 'Something went wrong!'
     });
   });
+  let serverHasMounted = false;
+  app.listen(PORT, () => {
+  if (!serverHasMounted) {
+    // Execute your one-time code here
+    getTopTracks();
+    // Set the flag to ensure this code runs only once
+    serverHasMounted = true;
+  }
+
+  console.log(`Server is running on port ${PORT}`);
+});
 
   // Users API Server
   app.listen(PORT_USERS_API,
