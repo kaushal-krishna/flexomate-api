@@ -45,7 +45,6 @@ const getTopTracks = async () => {
     printError = `${error.code} : ${error.message}`;
   }
 };
-getTopTracks();
 
 // Connect to MongoDB
 MongoClient.connect(mongoURL, {
