@@ -9,8 +9,9 @@ const bodyParser = require('body-parser');
 const schedule = require('node-schedule');
 
 const app = express();
-const PORT_USERS_API = 3000;
-const PORT_COLLECTIONS_API = 3001;
+const PORT = 3000;
+const PORT_USERS_API = 3001;
+const PORT_COLLECTIONS_API = 3002;
 const mongoURL = 'mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority';
 
 app.use(cors());
