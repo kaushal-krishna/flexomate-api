@@ -13,6 +13,7 @@ const mongoURL = "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mong
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/favicon.ico', express.static('images/favicon.ico')); 
 let db;
 
 MongoClient.connect(mongoURL, {
