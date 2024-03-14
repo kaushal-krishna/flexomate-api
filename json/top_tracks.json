@@ -1,1 +1,414 @@
-
+{
+  "success": true,
+  "nextOffset": null,
+  "trackList": [
+    {
+      "id": "3w0w2T288dec0mgeZZqoNN",
+      "title": "CARNIVAL",
+      "artists": "¥$, Kanye West, Ty Dolla $ign, Rich The Kid, Playboi Carti",
+      "cover": "https://i.scdn.co/image/ab67616d00001e020a31b4026a452ae8c3f97a76",
+      "album": "VULTURES 1",
+      "releaseDate": "2024-02-09"
+    },
+    {
+      "id": "52eIcoLUM25zbQupAZYoFh",
+      "title": "redrum",
+      "artists": "21 Savage",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02bbdceba2bf1867d4966d0347",
+      "album": "american dream",
+      "releaseDate": "2024-01-12"
+    },
+    {
+      "id": "57wp7VFnV8X0pSVnYArGeJ",
+      "title": "Whatever She Wants",
+      "artists": "Bryson Tiller",
+      "cover": "https://i.scdn.co/image/ab67616d00001e021aba7b448d35bd576ceac182",
+      "album": "Whatever She Wants",
+      "releaseDate": "2024-02-13"
+    },
+    {
+      "id": "7sTyAjxDXq9afwfSQy6D0s",
+      "title": "Bandit",
+      "artists": "Don Toliver",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02a149905378aeccdfcc04aa80",
+      "album": "Bandit",
+      "releaseDate": "2024-02-01"
+    },
+    {
+      "id": "6uTPdRrEDeH8Fyg5L5qmeU",
+      "title": "Never Lose Me",
+      "artists": "Flo Milli",
+      "cover": "https://i.scdn.co/image/ab67616d00001e026a17369515a43d96fb18d193",
+      "album": "Never Lose Me",
+      "releaseDate": "2023-11-30"
+    },
+    {
+      "id": "5tEaVciE2GnR28aN6W9cLS",
+      "title": "FUK SUMN",
+      "artists": "¥$, Kanye West, Ty Dolla $ign",
+      "cover": "https://i.scdn.co/image/ab67616d00001e020a31b4026a452ae8c3f97a76",
+      "album": "VULTURES 1",
+      "releaseDate": "2024-02-09"
+    },
+    {
+      "id": "7aqfrAY2p9BUSiupwk3svU",
+      "title": "First Person Shooter (feat. J. Cole)",
+      "artists": "Drake, J. Cole",
+      "cover": "https://i.scdn.co/image/ab67616d00001e027d384516b23347e92a587ed1",
+      "album": "For All The Dogs",
+      "releaseDate": "2023-10-06"
+    },
+    {
+      "id": "42VsgItocQwOQC3XWZ8JNA",
+      "title": "FE!N (feat. Playboi Carti)",
+      "artists": "Travis Scott, Playboi Carti",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02881d8d8378cd01099babcd44",
+      "album": "UTOPIA",
+      "releaseDate": "2023-07-28"
+    },
+    {
+      "id": "69phA1R4gmQsBFRQ3INW8C",
+      "title": "ONE CALL",
+      "artists": "Rich Amiri",
+      "cover": "https://i.scdn.co/image/ab67616d00001e022c2ada65af543cc22f7676d2",
+      "album": "Ghetto Fabulous",
+      "releaseDate": "2023-11-17"
+    },
+    {
+      "id": "2PZgh2Hjn9s2JSpdPB9ti1",
+      "title": "Keep It Thoro",
+      "artists": "Prodigy",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0240a5f773a7222fdfd8ad39ea",
+      "album": "H.N.I.C.",
+      "releaseDate": "2013-06-25"
+    },
+    {
+      "id": "5GCU2LJWPzoP8Q6nexs61z",
+      "title": "Let's Go",
+      "artists": "Key Glock",
+      "cover": "https://i.scdn.co/image/ab67616d00001e029c6589cb7500fa8e6f343990",
+      "album": "Glockoma 2 (Deluxe)",
+      "releaseDate": "2023-06-23"
+    },
+    {
+      "id": "1udwFobQ1JoOdWPQrp2b6u",
+      "title": "Surround Sound (feat. 21 Savage & Baby Tate)",
+      "artists": "JID, 21 Savage, Baby Tate",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02cae6e44dcc84e2035c3ad092",
+      "album": "The Forever Story (Extended Version)",
+      "releaseDate": "2022-10-31"
+    },
+    {
+      "id": "5NAOhPAZ57eFAXr3qatS6i",
+      "title": "Breathe",
+      "artists": "Yeat",
+      "cover": "https://i.scdn.co/image/ab67616d00001e029567b80f50a5b9f0178ae993",
+      "album": "2093",
+      "releaseDate": "2024-02-16"
+    },
+    {
+      "id": "2yUzr8Sr6ldG8vmHhZwTnz",
+      "title": "née-nah",
+      "artists": "21 Savage, Travis Scott, Metro Boomin",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02bbdceba2bf1867d4966d0347",
+      "album": "american dream",
+      "releaseDate": "2024-01-12"
+    },
+    {
+      "id": "779jpZikRmH99DiSVpwCHD",
+      "title": "soak city (do it)",
+      "artists": "310babii",
+      "cover": "https://i.scdn.co/image/ab67616d00001e023914b3abc04358b622224a3e",
+      "album": "lottery pick",
+      "releaseDate": "2023-06-15"
+    },
+    {
+      "id": "6ulEymrJ2Azx1uo3YHSE5w",
+      "title": "Bent",
+      "artists": "41, Kyle Richh, Jenn Carter, TaTa",
+      "cover": "https://i.scdn.co/image/ab67616d00001e027e1d2a4f64b8b472982bf0cf",
+      "album": "Bent",
+      "releaseDate": "2023-08-04"
+    },
+    {
+      "id": "1yeB8MUNeLo9Ek1UEpsyz6",
+      "title": "Rich Baby Daddy (feat. Sexyy Red & SZA)",
+      "artists": "Drake, Sexyy Red, SZA",
+      "cover": "https://i.scdn.co/image/ab67616d00001e027d384516b23347e92a587ed1",
+      "album": "For All The Dogs",
+      "releaseDate": "2023-10-06"
+    },
+    {
+      "id": "5gzEL5O1ubbtIHUhLkSMTz",
+      "title": "Loop Hole (feat. 21 Savage)",
+      "artists": "Tee Grizzley, 21 Savage",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0280124308a7660b2946b22b18",
+      "album": "Tee's Coney Island",
+      "releaseDate": "2023-11-03"
+    },
+    {
+      "id": "1nQaTUDJ7Rc4yOvZmg9Ozr",
+      "title": "Mmhmm",
+      "artists": "BigXthaPlug",
+      "cover": "https://i.scdn.co/image/ab67616d00001e026f333e1c294f20a6cfd997d2",
+      "album": "Mmhmm",
+      "releaseDate": "2023-10-06"
+    },
+    {
+      "id": "0SdBkFh6u5IHIXqlBu0NyI",
+      "title": "Yeah Glo!",
+      "artists": "GloRilla",
+      "cover": "https://i.scdn.co/image/ab67616d00001e021da67131f071aa3c7fe13f6e",
+      "album": "Yeah Glo!",
+      "releaseDate": "2024-02-09"
+    },
+    {
+      "id": "2YSzYUF3jWqb9YP9VXmpjE",
+      "title": "IDGAF (feat. Yeat)",
+      "artists": "Drake, Yeat",
+      "cover": "https://i.scdn.co/image/ab67616d00001e027d384516b23347e92a587ed1",
+      "album": "For All The Dogs",
+      "releaseDate": "2023-10-06"
+    },
+    {
+      "id": "2Adxpr1j5lSihOCsmIfflJ",
+      "title": "GET OFF ME (with Travis Scott)",
+      "artists": "Kid Cudi, Travis Scott",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02820f2a56e4a57cc9a94672a8",
+      "album": "INSANO",
+      "releaseDate": "2024-01-12"
+    },
+    {
+      "id": "1xWkeSPhf3bZqHY7Ncz8vp",
+      "title": "500lbs",
+      "artists": "Lil Tecca",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02b512ec018be2b70cc0ffa23d",
+      "album": "500lbs",
+      "releaseDate": "2023-07-21"
+    },
+    {
+      "id": "6wsqVwoiVH2kde4k4KKAFU",
+      "title": "I KNOW ?",
+      "artists": "Travis Scott",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02881d8d8378cd01099babcd44",
+      "album": "UTOPIA",
+      "releaseDate": "2023-07-28"
+    },
+    {
+      "id": "6x9pCndnXEoea0CMcfjs9W",
+      "title": "n.h.i.e.",
+      "artists": "21 Savage, Doja Cat",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02bbdceba2bf1867d4966d0347",
+      "album": "american dream",
+      "releaseDate": "2024-01-12"
+    },
+    {
+      "id": "5ZDIwpR2JMwuRM8xumtmxn",
+      "title": "Down With Me",
+      "artists": "Lil Tecca",
+      "cover": "https://i.scdn.co/image/ab67616d00001e022ac5f370c72b44e26c02ac49",
+      "album": "Down With Me",
+      "releaseDate": "2024-01-04"
+    },
+    {
+      "id": "1wMxLpODBBQMC6CiIBIV8e",
+      "title": "Giving Chanel",
+      "artists": "Meek Mill, Future",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02d52ae120eb70d7318cdd85b2",
+      "album": "HEATHENISM",
+      "releaseDate": "2024-02-29"
+    },
+    {
+      "id": "1a73gcEg6h6Re6hHXoVltJ",
+      "title": "FTCU",
+      "artists": "Nicki Minaj",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02651e1dbc0b5218f2306181a1",
+      "album": "Pink Friday 2",
+      "releaseDate": "2023-12-08"
+    },
+    {
+      "id": "2yrEBYkFqRcT65jRXnIICU",
+      "title": "Shampoo",
+      "artists": "Kodak Black",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02ad3a74461924d9c6056b99f3",
+      "album": "Shampoo",
+      "releaseDate": "2024-02-23"
+    },
+    {
+      "id": "4iEoDBAgMJIzest7VsDgmT",
+      "title": "Get In With Me",
+      "artists": "BossMan Dlow",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02d4a3a4050b0b2c1ff7e91e45",
+      "album": "Get In With Me",
+      "releaseDate": "2024-01-19"
+    },
+    {
+      "id": "1icgLGTpX2fQXKRe4D7w2b",
+      "title": "BACK TO ME",
+      "artists": "¥$, Kanye West, Ty Dolla $ign",
+      "cover": "https://i.scdn.co/image/ab67616d00001e020a31b4026a452ae8c3f97a76",
+      "album": "VULTURES 1",
+      "releaseDate": "2024-02-09"
+    },
+    {
+      "id": "4w2Furap0ZzaiK4J14E9sR",
+      "title": "Think U The Shit (Fart)",
+      "artists": "Ice Spice",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0216028dc1a1bc9ff0fc661ea6",
+      "album": "Think U The Shit (Fart)",
+      "releaseDate": "2024-01-26"
+    },
+    {
+      "id": "2Gk6fi0dqt91NKvlzGsmm7",
+      "title": "SAY MY GRACE (feat. Travis Scott)",
+      "artists": "Offset, Travis Scott",
+      "cover": "https://i.scdn.co/image/ab67616d00001e028473cdc72d9c6f9a2787e070",
+      "album": "SET IT OFF",
+      "releaseDate": "2023-10-13"
+    },
+    {
+      "id": "00p23Uw776hxaIGNWL9S1Y",
+      "title": "Himothy",
+      "artists": "Quavo",
+      "cover": "https://i.scdn.co/image/ab67616d00001e029d2238c5d6b71a52799492db",
+      "album": "Himothy",
+      "releaseDate": "2024-02-23"
+    },
+    {
+      "id": "35gu7pEQ2gOLUvskspCD3Y",
+      "title": "Bachelor",
+      "artists": "Turbo, Gunna",
+      "cover": "https://i.scdn.co/image/ab67616d00001e025a5b97ffb07ba0919da767c4",
+      "album": "Bachelor",
+      "releaseDate": "2023-11-03"
+    },
+    {
+      "id": "3ScMs95OaNlkrZuRe7gyYa",
+      "title": "PISTOL PACCIN",
+      "artists": "NLE Choppa, BigXthaPlug",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02e5eab924974edfc2f27606a1",
+      "album": "Cottonwood 2 (Deluxe 2.0)",
+      "releaseDate": "2023-10-27"
+    },
+    {
+      "id": "6lqRjNaL63nmwHbQcekxLh",
+      "title": "Stand On It (with Future)",
+      "artists": "Yeat, Future",
+      "cover": "https://i.scdn.co/image/ab67616d00001e028022c67229e4a5e1d76cb859",
+      "album": "2093 (P2)",
+      "releaseDate": "2024-02-17"
+    },
+    {
+      "id": "1Y1jtaZOJYgXBl7lKdLc9o",
+      "title": "A Cold Sunday",
+      "artists": "Lil Yachty",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0201988601f2c1ac0d6e60c772",
+      "album": "A Cold Sunday",
+      "releaseDate": "2024-02-02"
+    },
+    {
+      "id": "73f5rpLgydSRIvHzRLcJFF",
+      "title": "Crazy",
+      "artists": "Lil Baby",
+      "cover": "https://i.scdn.co/image/ab67616d00001e024959f88e7a735ed07b24ba71",
+      "album": "Crazy",
+      "releaseDate": "2023-12-15"
+    },
+    {
+      "id": "0peWrHmZmYS4D77vJJDMhJ",
+      "title": "Sundown (feat. JID)",
+      "artists": "21 Lil Harold, JID",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02a0373cd36c4301e085a4adc5",
+      "album": "Sundown (feat. JID)",
+      "releaseDate": "2024-01-26"
+    },
+    {
+      "id": "57QFfY6fYEwksK7FNMkSm8",
+      "title": "Point Em Out (with DaBaby)",
+      "artists": "That Mexican OT, DaBaby",
+      "cover": "https://i.scdn.co/image/ab67616d00001e021e486934cf878a270cd5775a",
+      "album": "Texas Technician",
+      "releaseDate": "2024-03-01"
+    },
+    {
+      "id": "3P7IwlmZ5HMZb9L2NIlJUR",
+      "title": "GRAMMY PARTY",
+      "artists": "DaBaby",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02b7457d1ab6edb14688468f3b",
+      "album": "GRAMMY PARTY",
+      "releaseDate": "2024-02-29"
+    },
+    {
+      "id": "7yfRb4seXT7w8zVMW0dXNa",
+      "title": "Bittersweet",
+      "artists": "Gunna",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02c7b1fa03ba00384d3c9995e5",
+      "album": "Bittersweet",
+      "releaseDate": "2024-02-16"
+    },
+    {
+      "id": "3K5yjMCFHN4TRWKj1zdKIQ",
+      "title": "Yeern 101",
+      "artists": "ScHoolboy Q",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02f54b07b9320d01052f28a7cf",
+      "album": "Yeern 101",
+      "releaseDate": "2024-02-15"
+    },
+    {
+      "id": "79AHPJd8upvNxyK2qQcY8J",
+      "title": "HISS",
+      "artists": "Megan Thee Stallion",
+      "cover": "https://i.scdn.co/image/ab67616d00001e029ea288a3dbc316b15cab5ad0",
+      "album": "HISS",
+      "releaseDate": "2024-01-26"
+    },
+    {
+      "id": "3ytbtkmMnkfwMrBi32a7FD",
+      "title": "Like What (Freestyle)",
+      "artists": "Cardi B",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02fe1fd60a94f026d613ac4be8",
+      "album": "Like What (Freestyle)",
+      "releaseDate": "2024-03-01"
+    },
+    {
+      "id": "4xhsWYTOGcal8zt0J161CU",
+      "title": "Lovin On Me",
+      "artists": "Jack Harlow",
+      "cover": "https://i.scdn.co/image/ab67616d00001e02fcf4adae77baba5d0169e8e8",
+      "album": "Lovin On Me",
+      "releaseDate": "2023-11-10"
+    },
+    {
+      "id": "631jkOX5M1tanSVc48QsJT",
+      "title": "Psycho CEO",
+      "artists": "Yeat",
+      "cover": "https://i.scdn.co/image/ab67616d00001e028022c67229e4a5e1d76cb859",
+      "album": "2093 (P2)",
+      "releaseDate": "2024-02-17"
+    },
+    {
+      "id": "1ytVc8fTgA7hAOOR0n4EH7",
+      "title": "Sunday Service",
+      "artists": "Latto",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0218badd1d31a2d7182feb97ae",
+      "album": "Sunday Service",
+      "releaseDate": "2024-02-09"
+    },
+    {
+      "id": "48k4TP7v4OtZRnblRrIEQT",
+      "title": "Cupid's Guidance",
+      "artists": "Sleepy Hallow",
+      "cover": "https://i.scdn.co/image/ab67616d00001e0289e5370eed75445f8839f326",
+      "album": "Cupid's Guidance",
+      "releaseDate": "2024-02-14"
+    },
+    {
+      "id": "0tCqfQ0MHZBYvsZ169ZnUM",
+      "title": "Sorrys & Ferraris",
+      "artists": "Polo G",
+      "cover": "https://i.scdn.co/image/ab67616d00001e029eb3f3142d48aba29030581a",
+      "album": "Sorrys & Ferraris",
+      "releaseDate": "2024-02-16"
+    }
+  ]
+}
