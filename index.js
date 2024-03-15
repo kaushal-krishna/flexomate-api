@@ -4,6 +4,7 @@ const axios = require("axios");
 const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cron = require("node-cron");
 const fs = require("fs");
 
 const app = express();
@@ -12,7 +13,6 @@ const mongoURL = "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mong
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/favicon.ico', express.static('images/favicon.ico')); 
 let db;
 
 MongoClient.connect(mongoURL, {
@@ -134,15 +134,7 @@ MongoClient.connect(mongoURL, {
       }
     };
 
-    app.get("/spotify/get_top_tracks", async (req, res) => {
-      try {
-        getTopTracks();
-        console.log("Done getting top tracks")
-      } catch (error) {
-        console.error("Error handling request:", error);
-        res.status(500).json({ message: "Internal Server Error" });
-      }
-    });
+    cron.schedule("0 0 0 * * *", getTopTracks);
 
     app.get("/spotify/top_tracks", async (req, res) => {
       try {
