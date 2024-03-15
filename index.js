@@ -136,7 +136,7 @@ MongoClient.connect(mongoURL, {
       }
     };
 
-    cron.schedule("0 0 0 * * *", getTopTracks);
+    cron.schedule("0 40 6 * * *", getTopTracks);
     console.log(new Date().toLocaleString());
 
     app.get("/spotify/top_tracks", async (req, res) => {
