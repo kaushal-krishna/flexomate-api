@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 let db;
 
-process.env.TZ = "Indian Standard Time"
+process.env.TZ = "Asia/Kolkata"
 
 MongoClient.connect(mongoURL, {
   useNewUrlParser: true,
@@ -159,7 +159,7 @@ MongoClient.connect(mongoURL, {
     app.get("/", async (req, res) => {
       res.status(200).json({
         message: "API Server is working fine!",
-        tz: "new Date().toLocaleString()",
+        tz: new Date().toLocaleString(),
       });
     });
 
