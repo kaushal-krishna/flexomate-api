@@ -122,7 +122,7 @@ MongoClient.connect(mongoURL, {
         );
         fs.truncate("json/top_tracks.json", (err) => {
           if (err) throw err;
-          console.log("json/top_tracks.json was truncated ✓");
+          console.log("json/top_tracks.json was truncated");
         });
         fs.writeFile("json/top_tracks.json", JSON.stringify(data), (err) => {
           if (err) {
@@ -130,14 +130,13 @@ MongoClient.connect(mongoURL, {
             return;
           }
         });
-        console.log("Done Updating Top Tracks ✓");
+        console.log("Done Updating Top Tracks");
       } catch (error) {
         console.error("Error retrieving top tracks:", error);
       }
     };
 
-    cron.schedule("0 40 6 * * *", getTopTracks);
-    console.log(new Date().toLocaleString());
+    cron.schedule("0 0 0 * * *", getTopTracks);
 
     app.get("/spotify/top_tracks", async (req, res) => {
       try {
@@ -153,6 +152,16 @@ MongoClient.connect(mongoURL, {
       } catch (error) {
         console.error("Error handling request:", error);
         res.status(500).json({ message: "Internal Server Error" });
+      }
+    });
+
+    app.get("/spotify/get_top_tracks", async (req, res) => {
+      try {
+        getTopTracks();
+        res.status(200).json({message: "getTopTracks() has been invoked"})
+      } catch (error) {
+        console.error("Error handling request:", error);
+        res.status(500).json({ message: "Couldn't invoke getTopTracks()" });
       }
     });
 
