@@ -23,7 +23,7 @@ MongoClient.connect(mongoURL, {
 })
   .then((client) => {
     console.log("Connected to MongoDB");
-    db = client.db("flexomate_db");
+    db = client.db("users");
 
     app.get("/add_countries", async (req, res) => {
   try {
