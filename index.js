@@ -9,7 +9,7 @@ const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoURL = "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/flexomate_db?retryWrites=true&w=majority";
+const mongoURL = "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/users?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(bodyParser.json());
