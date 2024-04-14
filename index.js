@@ -25,7 +25,7 @@ MongoClient.connect(mongoURL, {
     console.log("Connected to MongoDB");
     db = client.db("users");
 
-    app.get("/add_countries", async (req, res) => {
+  /*  app.get("/add_countries", async (req, res) => {
   try {
     const countries = [
       "AF", "AL", "DZ", "AD", "AO", "AG", "AR", "AM", "AU", "AT", "AZ",
@@ -63,7 +63,7 @@ MongoClient.connect(mongoURL, {
     console.error("Error adding countries collections:", error.message);
     res.status(500).json({ message: "Failed to add countries collections" });
   }
-});
+});*/
     
     app.post("/users", async (req, res) => {
       try {
