@@ -25,6 +25,46 @@ MongoClient.connect(mongoURL, {
     console.log("Connected to MongoDB");
     db = client.db("flexomate_db");
 
+    app.get("/add_countries", async (req, res) => {
+  try {
+    const countries = [
+      "AF", "AL", "DZ", "AD", "AO", "AG", "AR", "AM", "AU", "AT", "AZ",
+      "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BT", "BO", "BA",
+      "BW", "BR", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "CF",
+      "TD", "CL", "CN", "CO", "KM", "CG", "CR", "HR", "CU", "CY", "CZ",
+      "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE",
+      "SZ", "ET", "FJ", "FI", "FR", "GA", "GM", "GE", "DE", "GH", "GR",
+      "GD", "GT", "GN", "GW", "GY", "HT", "VA", "HN", "HU", "IS", "IN",
+      "ID", "IR", "IQ", "IE", "IL", "IT", "JM", "JP", "JO", "KZ", "KE",
+      "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT",
+      "LU", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU",
+      "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MA", "MZ", "MM", "NA",
+      "NR", "NP", "NL", "NZ", "NI", "NE", "NG", "KP", "NO", "OM", "PK",
+      "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PL", "PT", "QA", "RO",
+      "RU", "RW", "KN", "LC", "VC", "WS", "SM", "ST", "SA", "SN", "RS",
+      "SC", "SL", "SG", "SK", "SI", "SB", "SO", "ZA", "KR", "SS", "ES",
+      "LK", "SD", "SR", "SE", "CH", "SY", "TJ", "TZ", "TH", "TL", "TG",
+      "TO", "TT", "TN", "TR", "TM", "TV", "UG", "UA", "AE", "GB", "US",
+      "UY", "UZ", "VU", "VE", "VN", "YE", "ZM", "ZW"
+    ];
+    const collections = countries.map(country => `Users_${country}`);
+    
+    await Promise.all(collections.map(async (collection) => {
+      try {
+        await db.createCollection(collection);
+        console.log(`Collection ${collection} created successfully`);
+      } catch (error) {
+        console.error(`Error creating collection ${collection}:`, error);
+      }
+    }));
+
+    res.status(200).json({ message: "Countries collections added successfully" });
+  } catch (error) {
+    console.error("Error adding countries collections:", error.message);
+    res.status(500).json({ message: "Failed to add countries collections" });
+  }
+});
+    
     app.post("/users", async (req, res) => {
       try {
         await db.collection("users").insertOne(req.body);
