@@ -25,7 +25,7 @@ MongoClient.connect(mongoURL, {
     console.log("Connected to MongoDB");
     db = client.db("users");
 
- app.get("/add_continents", async (req, res) => {
+/* app.get("/add_continents", async (req, res) => {
   try {
     const continents = ["Africa", "Antarctica", "Asia", "Europe", "North_America", "Oceania", "South_America"];
     const collections = continents.map(continent => `Users_${continent}`);
@@ -58,7 +58,7 @@ MongoClient.connect(mongoURL, {
           message: "User creation failed.",
         });
       }
-    });
+    }); */
 
     app.get("/users", async (req, res) => {
       try {
