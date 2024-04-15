@@ -44,7 +44,7 @@ MongoClient.connect(mongoURL, {
     console.error("Error adding continents collections:", error.message);
     res.status(500).json({ message: "Failed to add continents collections" });
   }
-});
+}); */
     
     app.post("/users", async (req, res) => {
       try {
@@ -58,7 +58,7 @@ MongoClient.connect(mongoURL, {
           message: "User creation failed.",
         });
       }
-    }); */
+    });
 
     app.get("/users", async (req, res) => {
       try {
