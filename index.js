@@ -50,8 +50,7 @@ MongoClient.connect(mongoURL, {
         await db.collection(`Users_${userData.continent}`).insertOne(userData);
         res.status(200).json({
           message: "User creation initiated!",
-          info: await db.collection(userData.continent).findOne({_id:
-          userData._id}).toArray()
+          info: userData 
         });
       } catch (error) {
         console.error("Error creating user:", error.message);
@@ -79,6 +78,22 @@ MongoClient.connect(mongoURL, {
     });
   }
 });
+
+app.get("/users/delete", async (req, res) => {
+  try {
+    // delete all users of continent in query
+    const { continent } = req.query;
+    await db.collection(`Users_${continent}`).deleteMany({});
+    res.status(200).json({
+      message: "User deletion initiated!" ,
+    });
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    res.status(500).json({
+      message: "User deletion failed.",
+    });
+  }
+})
 
     app.post("/libraries", async (req, res) => {
       try {
