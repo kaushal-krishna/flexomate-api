@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "format": "npx prettier . --write"
+    "format": "npx prettier . --write",
+    "push": "git add . && git commit -m 'Update' && git push origin main"
   },
   "author": "Florixer Inc.",
   "license": "ISC",
