@@ -9,22 +9,24 @@ const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoURL = "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/users?retryWrites=true&w=majority";
+const mongoURL =
+  "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/users?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(bodyParser.json());
 let db;
 
-process.env.TZ = "Asia/Kolkata"
+process.env.TZ = "Asia/Kolkata";
 
 MongoClient.connect(mongoURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then((client) => {
+})
+  .then((client) => {
     console.log("Connected to MongoDB");
     db = client.db("users");
 
-/* app.get("/add_continents", async (req, res) => {
+    /* app.get("/add_continents", async (req, res) => {
   try {
     const continents = ["Africa", "Antarctica", "Asia", "Europe", "North_America", "Oceania", "South_America"];
     const collections = continents.map(continent => `Users_${continent}`);
@@ -44,13 +46,13 @@ MongoClient.connect(mongoURL, {
     res.status(500).json({ message: "Failed to add continents collections" });
   }
 }); */
-        app.post("/users/add", async (req, res) => {
+    app.post("/users/add", async (req, res) => {
       try {
         const userData = req.body;
         await db.collection(`Users_${userData.continent}`).insertOne(userData);
         res.status(200).json({
           message: "User creation initiated!",
-          info: userData 
+          info: userData,
         });
       } catch (error) {
         console.error("Error creating user:", error.message);
@@ -61,50 +63,38 @@ MongoClient.connect(mongoURL, {
     });
 
     app.get("/users", async (req, res) => {
-  try {
-    const collections = await db.listCollections().toArray();
-    const allUsers = {};
-
-    await Promise.all(collections.map(async (collection) => {
-      const collectionName = collection.name;
-      const users = await db.collection(collectionName).find().toArray();
-      allUsers[collectionName] = users;
-    }));
-
-    res.status(200).json(allUsers);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-});
-
-app.get("/users/delete", async (req, res) => {
-  try {
-    // delete all users of continent in query
-    const { continent } = req.query;
-    await db.collection(`Users_${continent}`).deleteMany({});
-    res.status(200).json({
-      message: "User deletion initiated!" ,
-    });
-  } catch (error) {
-    console.error("Error deleting user:", error.message);
-    res.status(500).json({
-      message: "User deletion failed.",
-    });
-  }
-})
-
-    app.post("/libraries", async (req, res) => {
       try {
-        await db.collection("libraries").insertOne(req.body);
+        const collections = await db.listCollections().toArray();
+        const allUsers = {};
+
+        await Promise.all(
+          collections.map(async (collection) => {
+            const collectionName = collection.name;
+            const users = await db.collection(collectionName).find().toArray();
+            allUsers[collectionName] = users;
+          }),
+        );
+
+        res.status(200).json(allUsers);
+      } catch (error) {
+        res.status(500).json({
+          message: error.message,
+        });
+      }
+    });
+
+    app.get("/users/delete", async (req, res) => {
+      try {
+        // delete all users of continent in query
+        const { continent } = req.query;
+        await db.collection(`Users_${continent}`).deleteMany({});
         res.status(200).json({
-          message: "Library creation initiated!",
+          message: "User deletion initiated!",
         });
       } catch (error) {
-        console.error("Error creating library:", error.message);
+        console.error("Error deleting user:", error.message);
         res.status(500).json({
-          message: "Library creation failed.",
+          message: "User deletion failed.",
         });
       }
     });
@@ -130,7 +120,7 @@ app.get("/users/delete", async (req, res) => {
               "User-Agent":
                 "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
             },
-          }
+          },
         );
 
         res.json(externalApiResponse.data);
@@ -152,7 +142,7 @@ app.get("/users/delete", async (req, res) => {
                 "b2fd7811a0msha2d668dfd2c45bap100a30jsn22bc61f46071",
               "X-RapidAPI-Host": "spotify-downloader1.p.rapidapi.com",
             },
-          }
+          },
         );
         fs.truncate("json/top_tracks.json", (err) => {
           if (err) throw err;
@@ -177,7 +167,9 @@ app.get("/users/delete", async (req, res) => {
         fs.readFile("json/top_tracks.json", function (err, data) {
           if (err) {
             console.error("Error reading file:", err);
-            res.status(500).json({ message: "Failed to retrieve top tracks" });
+            res.status(500).json({
+              message: "Failed to retrieve top tracks",
+            });
             return;
           }
           const topTracks = JSON.parse(data);
@@ -192,10 +184,14 @@ app.get("/users/delete", async (req, res) => {
     app.get("/spotify/get_top_tracks", async (req, res) => {
       try {
         getTopTracks();
-        res.status(200).json({message: "getTopTracks() has been invoked"})
+        res.status(200).json({
+          message: "getTopTracks() has been invoked",
+        });
       } catch (error) {
         console.error("Error handling request:", error);
-        res.status(500).json({ message: "Couldn't invoke getTopTracks()" });
+        res.status(500).json({
+          message: "Couldn't invoke getTopTracks()",
+        });
       }
     });
 
