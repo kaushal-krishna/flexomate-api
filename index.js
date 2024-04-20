@@ -6,11 +6,13 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const fs = require("fs");
+const { sendEmailOtp } = require("mailer/sendEmailOtp.js")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoURL =
   "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/users?retryWrites=true&w=majority";
+  
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -194,6 +196,8 @@ MongoClient.connect(mongoURL, {
         });
       }
     });
+    
+    app.post("/mailer/get_email_otp", sendEmailOtp)
 
     app.get("/", async (req, res) => {
       res.status(200).json({
