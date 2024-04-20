@@ -49,7 +49,7 @@ const sendSignupEmailOtp = async (req, res) => {
     let mailBody = {
       body: {
         greeting: "Dear",
-        name: "Kaushal",
+        name: userEmail.split('@')[0],
         intro: "Welcome to Flexiyo! We're very excited to have you with us.",
         action: {
           instructions: "Your OTP for Flexiyo account verification is:",
