@@ -6,28 +6,45 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const fs = require("fs");
-const { sendEmailOtp } = require("./mailer/sendEmailOtp.js"); // Change import to require
-const dotenv = require("dotenv"); // Add dotenv import
+const { sendSignupEmailOtp } = require("./mailer/otp/sendSignupOtp.js");
+const dotenv = require("dotenv");
+const { verifySignupEmailOtp } = require("./mailer/otp/verifySignupOtp.js");
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoURL = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI;
 
 app.use(cors());
 app.use(bodyParser.json());
-let db;
 
 process.env.TZ = "Asia/Kolkata";
 
-MongoClient.connect(mongoURL, {
+app.get("/", async (req, res) => {
+  res.status(200).json({
+    message: "API Server is working fine!",
+    tz: new Date().toLocaleString(),
+  });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Something went wrong!",
+  });
+});
+app.listen(PORT, () => {
+  console.log(`API Server is running on port ${PORT}`);
+});
+
+MongoClient.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then((client) => {
     console.log("Connected to MongoDB");
-    db = client.db("users");
+    const usersDb = client.db("users");
 
     /* app.get("/add_continents", async (req, res) => {
       try {
@@ -36,7 +53,7 @@ MongoClient.connect(mongoURL, {
         
         await Promise.all(collections.map(async (collection) => {
           try {
-            await db.createCollection(collection);
+            await usersDb.createCollection(collection);
             console.log(`Collection ${collection} created successfully`);
           } catch (error) {
             console.error(`Error creating collection ${collection}:`, error);
@@ -60,7 +77,7 @@ MongoClient.connect(mongoURL, {
           });
         }
 
-        await db.collection(`Users_${userData.continent}`).insertOne(userData);
+        await usersDb.collection(`Users_${userData.continent}`).insertOne(userData);
         res.status(200).json({
           message: "User creation initiated!",
           info: userData,
@@ -75,13 +92,13 @@ MongoClient.connect(mongoURL, {
 
     app.get("/users", async (req, res) => {
       try {
-        const collections = await db.listCollections().toArray();
+        const collections = await usersDb.listCollections().toArray();
         const allUsers = {};
 
         await Promise.all(
           collections.map(async (collection) => {
             const collectionName = collection.name;
-            const users = await db.collection(collectionName).find().toArray();
+            const users = await usersDb.collection(collectionName).find().toArray();
             allUsers[collectionName] = users;
           }),
         );
@@ -98,7 +115,7 @@ MongoClient.connect(mongoURL, {
     app.get("/users/delete", async (req, res) => {
       try {
         const { continent } = req.query;
-        await db.collection(`Users_${continent}`).deleteMany({});
+        await usersDb.collection(`Users_${continent}`).deleteMany({});
         res.status(200).json({
           message: "User deletion initiated!",
         });
@@ -205,27 +222,9 @@ MongoClient.connect(mongoURL, {
         });
       }
     });
-
-    app.post("/mailer/get_email_otp", sendEmailOtp);
-
-    app.get("/", async (req, res) => {
-      res.status(200).json({
-        message: "API Server is working fine!",
-        tz: new Date().toLocaleString(),
-      });
-    });
-
-    app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).json({
-        message: "Something went wrong!",
-      });
-    });
-
-    app.listen(PORT, () => {
-      console.log(`API Server is running on port ${PORT}`);
-    });
+    app.post("/mailer/send_signup_email_otp", sendSignupEmailOtp);
+    app.post("/mailer/verify_signup_email_otp", verifySignupEmailOtp);
   })
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
-  });
+  })

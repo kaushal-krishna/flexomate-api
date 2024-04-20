@@ -1,10 +1,11 @@
-/* mailer/sendEmailOtp.js */
-
+const { MongoClient } = require("mongodb");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const dotenv = require("dotenv");
 dotenv.config();
+const mongoURI = process.env.MONGODB_URI;
 
+/** Email SMTP Configuration */
 const { SMTP_HOST, SMTP_EMAIL, SMTP_PASSWORD } = process.env;
 
 const transporter = nodemailer.createTransport({
@@ -17,10 +18,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Function to generate OTP
+function generateOTP() {
+  let digits =
+    "0123456789";
+  let OTP = "";
+  let length = digits.length;
+  for (let i = 0; i < 6; i++) {
+    OTP += digits[Math.floor(Math.random() * length)];
+  }
+  return OTP;
+}
+
 /** Send Email OTP to user's Email */
-const sendEmailOtp = (req, res) => {
+const sendSignupEmailOtp = async (req, res) => {
   try {
     const { userEmail } = req.body;
+    const generatedEmailOtp = generateOTP();
 
     let MailGenerator = new Mailgen({
       theme: "default",
@@ -41,7 +55,7 @@ const sendEmailOtp = (req, res) => {
           instructions: "Your OTP for Flexiyo account verification is:",
           button: {
             color: "#000B13",
-            text: "648423",
+            text: generatedEmailOtp,
           },
         },
         outro:
@@ -58,22 +72,48 @@ const sendEmailOtp = (req, res) => {
       html: mailTemplate,
     };
 
-    transporter.sendMail(mailMessage, (error) => {
+    transporter.sendMail(mailMessage, async (error) => {
       if (error) {
-        console.error("Error sending email:", error);
+        console.error("Error sending email OTP:", error);
         return res.status(500).json({ error: "Failed to send OTP email" });
       } else {
-        return res.status(201).json({
+        const client = new MongoClient(mongoURI);
+        await client.connect();
+        const verificationOtpsDb = client.db("verification_otps");
+        const existingUser = await verificationOtpsDb
+          .collection("Otps_Email")
+          .findOne({ email: userEmail });
+
+        if (existingUser) {
+          if (existingUser.otp.length === 2) {
+            existingUser.otp.shift();
+          }
+          existingUser.otp.push(generatedEmailOtp);
+
+          await verificationOtpsDb
+            .collection("Otps_Email")
+            .updateOne(
+              { email: userEmail },
+              { $set: { otp: existingUser.otp } },
+            );
+        } else {
+          await verificationOtpsDb.collection("Otps_Email").insertOne({
+            email: userEmail,
+            otp: [generatedEmailOtp],
+          });
+        }
+
+        return res.status(200).json({
           msg: "We have sent you an Email OTP, Please verify your account to continue.",
         });
       }
-    });
+    })
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error sending email OTP:", error);
     return res.status(500).json({ error: "Failed to send OTP email" });
   }
 };
 
 module.exports = {
-  sendEmailOtp,
+  sendSignupEmailOtp,
 };
