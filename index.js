@@ -1,18 +1,19 @@
 // index.js
 const express = require("express");
 const axios = require("axios");
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient } = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const fs = require("fs");
-const { sendEmailOtp } = require("mailer/sendEmailOtp.js")
+const { sendEmailOtp } = require("./mailer/sendEmailOtp.js"); // Change import to require
+const dotenv = require("dotenv"); // Add dotenv import
+
+dotenv.config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoURL =
-  "mongodb+srv://florixer:Kau93043@flexomate-cluster.bzqxpj3.mongodb.net/users?retryWrites=true&w=majority";
-  
+const mongoURL = process.env.MONGODB_URI;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,28 +30,36 @@ MongoClient.connect(mongoURL, {
     db = client.db("users");
 
     /* app.get("/add_continents", async (req, res) => {
-  try {
-    const continents = ["Africa", "Antarctica", "Asia", "Europe", "North_America", "Oceania", "South_America"];
-    const collections = continents.map(continent => `Users_${continent}`);
-    
-    await Promise.all(collections.map(async (collection) => {
       try {
-        await db.createCollection(collection);
-        console.log(`Collection ${collection} created successfully`);
+        const continents = ["Africa", "Antarctica", "Asia", "Europe", "North_America", "Oceania", "South_America"];
+        const collections = continents.map(continent => `Users_${continent}`);
+        
+        await Promise.all(collections.map(async (collection) => {
+          try {
+            await db.createCollection(collection);
+            console.log(`Collection ${collection} created successfully`);
+          } catch (error) {
+            console.error(`Error creating collection ${collection}:`, error);
+          }
+        }));
+  
+        res.status(200).json({ message: "Continents collections added successfully" });
       } catch (error) {
-        console.error(`Error creating collection ${collection}:`, error);
+        console.error("Error adding continents collections:", error.message);
+        res.status(500).json({ message: "Failed to add continents collections" });
       }
-    }));
+    }); */
 
-    res.status(200).json({ message: "Continents collections added successfully" });
-  } catch (error) {
-    console.error("Error adding continents collections:", error.message);
-    res.status(500).json({ message: "Failed to add continents collections" });
-  }
-}); */
     app.post("/users/add", async (req, res) => {
       try {
         const userData = req.body;
+        // Perform validation
+        if (!userData.name || !userData.email || !userData.continent) {
+          return res.status(400).json({
+            message: "Name, Email, and Continent are required fields.",
+          });
+        }
+
         await db.collection(`Users_${userData.continent}`).insertOne(userData);
         res.status(200).json({
           message: "User creation initiated!",
@@ -79,6 +88,7 @@ MongoClient.connect(mongoURL, {
 
         res.status(200).json(allUsers);
       } catch (error) {
+        console.error("Error retrieving users:", error.message);
         res.status(500).json({
           message: error.message,
         });
@@ -87,7 +97,6 @@ MongoClient.connect(mongoURL, {
 
     app.get("/users/delete", async (req, res) => {
       try {
-        // delete all users of continent in query
         const { continent } = req.query;
         await db.collection(`Users_${continent}`).deleteMany({});
         res.status(200).json({
@@ -196,8 +205,8 @@ MongoClient.connect(mongoURL, {
         });
       }
     });
-    
-    app.post("/mailer/get_email_otp", sendEmailOtp)
+
+    app.post("/mailer/get_email_otp", sendEmailOtp);
 
     app.get("/", async (req, res) => {
       res.status(200).json({
