@@ -104,7 +104,7 @@ const sendSignupEmailOtp = async (req, res) => {
         }
 
         return res.status(200).json({
-          msg: "We have sent you an Email OTP. Please enter the sent OTP to complete signup.",
+          msg: `OTP sent to ${userEmail} successfully. Please check your email.`,
           type: "success"
         });
       }
