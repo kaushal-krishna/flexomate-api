@@ -17,9 +17,10 @@ const verifySignupEmailOtp = async (req, res) => {
     if (existingUser.otp.includes(userOtp)) {
       return res.status(200).json({
         msg: "Your account has been verified successfully.",
+        type: "success"
       });
     } else {
-      return res.status(200).json({ msg: "Invalid OTP. Please try again." });
+      return res.status(200).json({ msg: "Invalid OTP. Please try again.", "type": "error" });
     }
   } catch (error) {
     console.error("Error verifying email OTP:", error);
