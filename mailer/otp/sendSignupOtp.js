@@ -75,7 +75,7 @@ const sendSignupEmailOtp = async (req, res) => {
     transporter.sendMail(mailMessage, async (error) => {
       if (error) {
         console.error("Error sending email OTP:", error);
-        return res.status(400).json({ error: "Failed to send Email OTP" });
+        return res.status(200).json({ msg: "Failed to send Email OTP" });
       } else {
         const client = new MongoClient(mongoURI);
         await client.connect();
