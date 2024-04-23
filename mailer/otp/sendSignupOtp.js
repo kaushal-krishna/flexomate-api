@@ -21,10 +21,10 @@ const transporter = nodemailer.createTransport({
 // Function to generate OTP
 function generateOTP() {
   let digits =
-    "0123456789";
+    "123456789";
   let OTP = "";
   let length = digits.length;
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     OTP += digits[Math.floor(Math.random() * length)];
   }
   return OTP;
