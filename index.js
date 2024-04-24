@@ -21,10 +21,16 @@ app.use(bodyParser.json());
 process.env.TZ = "Asia/Kolkata";
 
 app.get("/", async (req, res) => {
+  let clientIp = req.ip;
+
+    // Check if the request is coming from a proxy server
+    if (req.headers['x-forwarded-for']) {
+      clientIp = req.headers['x-forwarded-for'].split(',')[0].trim();
+    }
   res.status(200).json({
     message: "API Server is working fine!",
     tz: new Date().toLocaleString(),
-    callerIp: req.ip,
+    callerIp: clientIp,
   });
 });
 
