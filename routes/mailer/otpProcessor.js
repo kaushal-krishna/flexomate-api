@@ -5,33 +5,32 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoURI = process.env.MONGODB_URI;
 
-/** Email SMTP Configuration */
-const { SMTP_HOST, SMTP_EMAIL, SMTP_PASSWORD } = process.env;
-
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: 587,
-  secure: false,
-  auth: {
-    user: SMTP_EMAIL,
-    pass: SMTP_PASSWORD,
-  },
-});
-
-// Function to generate OTP
-function generateOTP() {
-  let digits =
-    "123456789";
-  let OTP = "";
-  let length = digits.length;
-  for (let i = 0; i < 6; i++) {
-    OTP += digits[Math.floor(Math.random() * length)];
-  }
-  return OTP;
-}
-
-/** Send Email OTP to user's Email */
+/* Send Email OTP to user's Email */
 const sendSignupEmailOtp = async (req, res) => {
+  /** Email SMTP Configuration */
+  const { SMTP_HOST, SMTP_EMAIL, SMTP_PASSWORD } = process.env;
+
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: 587,
+    secure: false,
+    auth: {
+      user: SMTP_EMAIL,
+      pass: SMTP_PASSWORD,
+    },
+  });
+
+  // Function to generate OTP
+  function generateOTP() {
+    let digits =
+      "123456789";
+    let OTP = "";
+    let length = digits.length;
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * length)];
+    }
+    return OTP;
+  }
   try {
     const { userEmail } = req.body;
     const generatedEmailOtp = generateOTP();
@@ -75,7 +74,7 @@ const sendSignupEmailOtp = async (req, res) => {
     transporter.sendMail(mailMessage, async (error) => {
       if (error) {
         console.error("Error sending email OTP:", error);
-        return res.status(200).json({ msg: "Failed to send Email OTP", type: "error"});
+        return res.status(200).json({ msg: "Failed to send Email OTP", type: "error" });
       } else {
         const client = new MongoClient(mongoURI);
         await client.connect();
@@ -115,6 +114,32 @@ const sendSignupEmailOtp = async (req, res) => {
   }
 };
 
+/* Verify Email OTP with the Database */
+const verifySignupEmailOtp = async (req, res) => {
+  try {
+    const { userEmail, userOtp } = req.body;
+    const client = new MongoClient(mongoURI);
+    await client.connect();
+    const verificationOtpsDb = client.db("verification_otps");
+    const existingUser = await verificationOtpsDb
+      .collection("Otps_Email")
+      .findOne({ email: userEmail });
+
+    if (existingUser.otp.includes(userOtp)) {
+      return res.status(200).json({
+        msg: "Your account has been verified successfully.",
+        type: "success"
+      });
+    } else {
+      return res.status(200).json({ msg: "Invalid OTP. Please try again.", "type": "error" });
+    }
+  } catch (error) {
+    console.error("Error verifying email OTP:", error);
+    return res.status(500).json({ error: "Failed to verify Email OTP" });
+  }
+};
+
 module.exports = {
   sendSignupEmailOtp,
+  verifySignupEmailOtp
 };

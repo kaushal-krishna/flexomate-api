@@ -6,10 +6,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const fs = require("fs");
-const { sendSignupEmailOtp } = require("./mailer/otp/sendSignupOtp.js");
+const { getAllUsers, searchUsers, createUserAccount, deleteUserAccount } = require("./routes/users/userAccountProcessor.js")
+const { sendSignupEmailOtp, verifySignupEmailOtp } = require("./routes/mailer/otpProcessor.js");
 const dotenv = require("dotenv");
-const { verifySignupEmailOtp } = require("./mailer/otp/verifySignupOtp.js");
-
 dotenv.config();
 
 const app = express();
@@ -67,65 +66,10 @@ MongoClient.connect(mongoURI, {
       }
     }); */
 
-    app.post("/users/add", async (req, res) => {
-      try {
-        const userData = req.body;
-        // Perform validation
-        if (!userData.name || !userData.email || !userData.continent) {
-          return res.status(400).json({
-            message: "Name, Email, and Continent are required fields.",
-          });
-        }
-
-        await usersDb.collection(`Users_${userData.continent}`).insertOne(userData);
-        res.status(200).json({
-          message: "User creation initiated!",
-          info: userData,
-        });
-      } catch (error) {
-        console.error("Error creating user:", error.message);
-        res.status(500).json({
-          message: "User creation failed.",
-        });
-      }
-    });
-
-    app.get("/users", async (req, res) => {
-      try {
-        const collections = await usersDb.listCollections().toArray();
-        const allUsers = {};
-
-        await Promise.all(
-          collections.map(async (collection) => {
-            const collectionName = collection.name;
-            const users = await usersDb.collection(collectionName).find().toArray();
-            allUsers[collectionName] = users;
-          }),
-        );
-
-        res.status(200).json(allUsers);
-      } catch (error) {
-        console.error("Error retrieving users:", error.message);
-        res.status(500).json({
-          message: error.message,
-        });
-      }
-    });
-
-    app.get("/users/delete", async (req, res) => {
-      try {
-        const { continent } = req.query;
-        await usersDb.collection(`Users_${continent}`).deleteMany({});
-        res.status(200).json({
-          message: "User deletion initiated!",
-        });
-      } catch (error) {
-        console.error("Error deleting user:", error.message);
-        res.status(500).json({
-          message: "User deletion failed.",
-        });
-      }
-    });
+    app.get("/users", getAllUsers);
+    app.get("/users/search", searchUsers);
+    app.post("/users/create_account", createUserAccount);
+    app.get("/users/delete_account/:username", deleteUserAccount);
 
     app.get("/spotify/download/:id", async (req, res) => {
       try {
