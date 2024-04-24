@@ -24,6 +24,7 @@ app.get("/", async (req, res) => {
   res.status(200).json({
     message: "API Server is working fine!",
     tz: new Date().toLocaleString(),
+    callerIp: req.ip,
   });
 });
 
