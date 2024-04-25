@@ -89,7 +89,7 @@ const createUserAccount = async (req, res) => {
     },
     "images": {
       "profile": {
-        "src": "https://0.gravatar.com/avatar/f18370ec3562e3cd21fa469e2b582bd741115e5fd8b094c34d952a5871562a87?size=512",
+        "src": "https://archive.org/download/twitter-default-pfp/e.png",
         "width": 400,
         "height": 400
       },
@@ -99,27 +99,25 @@ const createUserAccount = async (req, res) => {
         "height": 270
       }
     },
-    "collection": {
+    "inventory": {
       "id": 128265169159425
     },
     "connections": {
       "mates": {
-        "totalCount": 2,
+        "totalCount": 0,
         "items": [
           {
-            "id": 84485327,
+            "uid": 84485327,
             "following": true,
             "follower": false,
-            "isClose": true,
             "chat": {
               "id": 432658765294515
             }
           },
           {
-            "id": 56734598,
+            "uid": 56734598,
             "following": false,
             "follower": true,
-            "isClose": true,
             "chat": {
               "id": 456987136597426
             }
@@ -130,16 +128,14 @@ const createUserAccount = async (req, res) => {
         "totalCount": 2,
         "items": [
           {
-            "id": 65278489,
+            "uid": 65278489,
             "mate": false,
             "follower": true,
-            "isClose": false
           },
           {
-            "id": 58293890,
+            "uid": 58293890,
             "mate": false,
             "follower": false,
-            "isClose": true
           }
         ]
       },
@@ -147,16 +143,14 @@ const createUserAccount = async (req, res) => {
         "totalCount": 2,
         "items": [
           {
-            "id": 12389042,
+            "uid": 12389042,
             "mate": false,
             "following": false,
-            "isClose": true
           },
           {
-            "id": 23903781,
+            "uid": 23903781,
             "mate": false,
             "following": false,
-            "isClose": true
           }
         ]
       }
