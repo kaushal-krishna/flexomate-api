@@ -189,7 +189,7 @@ const createUserAccount = async (req, res) => {
     }
 
     // If username is not taken, create the user
-    await usersDb.collection(`Users_${reqBody.continent}`).insertOne(userInfo);
+    await usersDb.collection(`Users_${userIpData.continent}`).insertOne(userInfo);
 
     res.status(200).json({
       message: "User creation initiated!",
