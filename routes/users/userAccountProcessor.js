@@ -77,7 +77,7 @@ const createUserAccount = async (req, res) => {
   let userIpData;
   iplocate(req.ip).then((results) => {
     userIpData = results;
-    console.log(userIpData);
+    console.log(req.ip);
   });
   const userInfo = {
     _id: null,
