@@ -82,7 +82,7 @@ const createUserAccount = async (req, res) => {
     }
   iplocate(clientIp).then((results) => {
     userIpData = results;
-    console.log(userIpData)
+    console.log({userIpData})
   });
   const userInfo = {
     _id: null,
@@ -99,7 +99,6 @@ const createUserAccount = async (req, res) => {
     dob: reqBody.dob,
     profession: reqBody.profession,
     company: null,
-    userIpData,
     bio: "Hi, I am new here on Flexiyo!",
     account: {
       type: reqBody.accountType,
@@ -192,7 +191,7 @@ const createUserAccount = async (req, res) => {
           .json({ message: "Username has already been taken." });
       }
     }
-
+    Object.assign(userInfo, userIpData);
     // If username is not taken, create the user
     await usersDb.collection(`Users_${userIpData.continent}`).insertOne(userInfo);
 
