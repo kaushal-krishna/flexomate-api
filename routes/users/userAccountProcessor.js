@@ -82,7 +82,7 @@ const createUserAccount = async (req, res) => {
     }
   iplocate(clientIp).then((results) => {
     userIpData = results;
-    console.log({userIpData})
+    console.log(userIpData)
   });
   const userInfo = {
     _id: null,
@@ -99,7 +99,7 @@ const createUserAccount = async (req, res) => {
     dob: reqBody.dob,
     profession: reqBody.profession,
     company: null,
-    location: userIpData,
+    userIpData,
     bio: "Hi, I am new here on Flexiyo!",
     account: {
       type: reqBody.accountType,
