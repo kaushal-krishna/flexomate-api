@@ -99,7 +99,7 @@ const createUserAccount = async (req, res) => {
     dob: reqBody.dob,
     profession: reqBody.profession,
     company: null,
-    location: {userIpData},
+    location: userIpData,
     bio: "Hi, I am new here on Flexiyo!",
     account: {
       type: reqBody.accountType,
