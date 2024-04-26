@@ -75,9 +75,14 @@ const searchUsers = async (req, res) => {
 const createUserAccount = async (req, res) => {
   const reqBody = req.body;
   let userIpData;
-  iplocate(req.ip).then((results) => {
+  let clientIp = req.ip;
+    // Check if the request is coming from a proxy server
+    if (req.headers['x-forwarded-for']) {
+      clientIp = req.headers['x-forwarded-for'].split(',')[0].trim();
+    }
+  iplocate(clientIp).then((results) => {
     userIpData = results;
-    console.log(req.ip);
+    console.log({userIpData})
   });
   const userInfo = {
     _id: null,
