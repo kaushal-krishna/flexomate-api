@@ -75,7 +75,6 @@ MongoClient.connect(mongoURI, {
     }); */
 
     app.get("/users", async (req, res) => {
-  const client = new MongoClient(mongoURI);
   try {
     const collections = await usersDb.listCollections().toArray();
     const allUsers = {};
@@ -97,6 +96,9 @@ MongoClient.connect(mongoURI, {
     await client.close();
   }
 });
+    app.get("/userss", async (req, res) => {
+      res.status(200).json({message: "Hello sir"})
+    });
     app.get("/users/search", searchUsers);
     app.post("/users/create_account", createUserAccount);
     app.get("/users/delete_account/:username", deleteUserAccount);
