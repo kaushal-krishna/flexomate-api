@@ -74,7 +74,29 @@ MongoClient.connect(mongoURI, {
       }
     }); */
 
-    app.get("/users", getAllUsers);
+    app.get("/users", async (req, res) => {
+  const client = new MongoClient(mongoURI);
+  try {
+    const collections = await usersDb.listCollections().toArray();
+    const allUsers = {};
+
+    // Fetch users from each collection
+    await Promise.all(
+      collections.map(async (collection) => {
+        const collectionName = collection.name;
+        const users = await usersDb.collection(collectionName).find().toArray();
+        allUsers[collectionName] = users;
+      }),
+    );
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  } finally {
+    await client.close();
+  }
+});
     app.get("/users/search", searchUsers);
     app.post("/users/create_account", createUserAccount);
     app.get("/users/delete_account/:username", deleteUserAccount);
