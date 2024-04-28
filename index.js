@@ -1,7 +1,5 @@
 // index.js
 const express = require("express");
-const axios = require("axios");
-const { MongoClient } = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
@@ -45,14 +43,6 @@ app.listen(PORT, () => {
   console.log(`API Server is running on port ${PORT}`);
 });
 
-MongoClient.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then((client) => {
-    console.log("Connected to MongoDB");
-    const usersDb = client.db("users");
-
     /* app.get("/add_continents", async (req, res) => {
       try {
         const continents = ["Africa", "Antarctica", "Asia", "Europe", "North_America", "Oceania", "South_America"];
@@ -74,28 +64,7 @@ MongoClient.connect(mongoURI, {
       }
     }); */
 
-    app.get("/users", async (req, res) => {
-  try {
-    const collections = await usersDb.listCollections().toArray();
-    const allUsers = {};
-
-    // Fetch users from each collection
-    await Promise.all(
-      collections.map(async (collection) => {
-        const collectionName = collection.name;
-        const users = await usersDb.collection(collectionName).find().toArray();
-        allUsers[collectionName] = users;
-      }),
-    );
-    res.status(200).json(allUsers);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  } finally {
-    await client.close();
-  }
-});
+    app.get("/users", getAllUsers);
     app.get("/userss", async (req, res) => {
       res.status(200).json({message: "Hello sir"})
     });
@@ -112,7 +81,3 @@ MongoClient.connect(mongoURI, {
     app.get("/spotify/get_top_tracks", spotifyGetTopTracks)
     app.post("/mailer/send_signup_email_otp", sendSignupEmailOtp);
     app.post("/mailer/verify_signup_email_otp", verifySignupEmailOtp);
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  })
