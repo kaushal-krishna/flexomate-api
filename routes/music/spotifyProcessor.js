@@ -24,10 +24,10 @@ const spotifyGetTopTracks = async (req, res) => {
         },
       },
     );
-    fs.truncate(topTracksJsonFilePath, (err) => {
-      if (err) throw err;
-      console.log("topTracksJsonFilePath was truncated");
-    });
+    fs.truncate(topTracksJsonFilePath, 0, (err) => {
+  if (err) throw err;
+  console.log("topTracksJsonFilePath was truncated");
+});
     fs.writeFile(topTracksJsonFilePath, JSON.stringify(data), (err) => {
       if (err) {
         console.error("Error writing to file:", err);
