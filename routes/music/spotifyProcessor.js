@@ -6,7 +6,7 @@ const spotifyListTopTracks = async (req, res) => {
   try {
     const data = await fs.readFile(topTracksJsonFilePath, "utf8");
     const topTracks = JSON.parse(data);
-    res.status(200).json({ topTracks });
+    res.status(200).json(topTracks);
   } catch (error) {
     console.error("Error handling request:", error);
     res.status(500).json({ message: "Internal Server Error" });
