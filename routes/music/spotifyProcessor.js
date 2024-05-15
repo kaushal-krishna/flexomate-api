@@ -37,6 +37,7 @@ const spotifyGetTopTracks = async (req, res) => {
     console.log("Done Updating Top Tracks");
     res.status(200).json({
       message: "getTopTracks request has been invoked",
+      data: data
     });
   } catch (error) {
     console.error("Error handling getTopTracks Request:", error);
