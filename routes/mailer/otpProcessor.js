@@ -34,7 +34,7 @@ const sendSignupEmailOtp = async (req, res) => {
   try {
     const { userEmail } = req.body;
     const generatedEmailOtp = generateOTP();
-
+    console.log("Req Body:", req.body);
     let MailGenerator = new Mailgen({
       theme: "default",
       product: {
