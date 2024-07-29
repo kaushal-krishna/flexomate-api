@@ -39,7 +39,7 @@ const sendSignupEmailOtp = async (req, res) => {
       theme: "default",
       product: {
         name: "Flexiyo",
-        link: "https://flexomate.web.app",
+        link: "https://flexiyo.web.app",
         logo: "https://res.cloudinary.com/dihwtwmhy/image/upload/v1713613926/flexiyo/flexiyo_landscape.png",
         logoHeight: "60px",
       },
