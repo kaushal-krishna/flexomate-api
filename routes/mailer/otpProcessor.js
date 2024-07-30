@@ -8,14 +8,14 @@ const mongoURI = process.env.MONGODB_URI;
 /* Send Email OTP to user's Email */
 const sendSignupEmailOtp = async (req, res) => {
   /** Email SMTP Configuration */
-  const { SMTP_HOST, SMTP_EMAIL, SMTP_PASSWORD } = process.env;
+  const { SMTP_HOST, SMTP_EMAIL, SMTP_USER, SMTP_PASSWORD } = process.env;
 
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,
     port: 587,
     secure: false,
     auth: {
-      user: SMTP_EMAIL,
+      user: SMTP_USER,
       pass: SMTP_PASSWORD,
     },
   });
@@ -65,7 +65,7 @@ const sendSignupEmailOtp = async (req, res) => {
     let mailTemplate = MailGenerator.generate(mailBody);
 
     let mailMessage = {
-      from: SMTP_EMAIL,
+      from: `"Flexiyo "${SMTP_EMAIL}`,
       to: userEmail,
       subject: "Flexiyo On Boarding OTP",
       html: mailTemplate,
