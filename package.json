@@ -2,10 +2,10 @@
   "name": "Flexomate API",
   "version": "1.0.0",
   "description": "The Official Flexomate API",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
     "vercel-build": "echo hello",
     "format": "npx prettier . --write",
     "push": "git add . && git commit -m 'Update' && git push origin main"
