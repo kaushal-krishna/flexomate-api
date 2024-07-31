@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
-const { getAllUsers, searchUsers, createUserAccount, deleteUserAccount } = require("./routes/users/userAccountProcessor.js")
+const { getAllUsers, searchUsers, createUserAccount, loginUserAccount, deleteUserAccount } = require("./routes/users/userAccountProcessor.js")
 const { spotifyGetTopTracks, spotifyListTopTracks, spotifyDownloadTrack } =
 require("./routes/music/spotifyProcessor.js")
 const { sendSignupEmailOtp, verifySignupEmailOtp } = require("./routes/mailer/otpProcessor.js");
@@ -77,6 +77,7 @@ MongoClient.connect(mongoURI, {
     app.get("/users", getAllUsers);
     app.get("/users/search", searchUsers);
     app.post("/users/create_account", createUserAccount);
+    app.post("/users/login_account", loginUserAccount);
     app.get("/users/delete_account/:username", deleteUserAccount);
 
     app.get("/spotify/download/:id", spotifyDownloadTrack);
