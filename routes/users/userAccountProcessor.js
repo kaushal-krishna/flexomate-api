@@ -76,13 +76,13 @@ const createUserAccount = async (req, res) => {
   const reqBody = req.body;
   let userIpData;
   let clientIp = req.ip;
-    // Check if the request is coming from a proxy server
-    if (req.headers['x-forwarded-for']) {
-      clientIp = req.headers['x-forwarded-for'].split(',')[0].trim();
-    }
+  // Check if the request is coming from a proxy server
+  if (req.headers["x-forwarded-for"]) {
+    clientIp = req.headers["x-forwarded-for"].split(",")[0].trim();
+  }
   iplocate(clientIp).then((results) => {
     userIpData = results;
-    console.log({userIpData})
+    console.log({ userIpData });
   });
   const userInfo = {
     _id: null,
@@ -100,7 +100,7 @@ const createUserAccount = async (req, res) => {
     dob: reqBody.dob,
     profession: reqBody.profession,
     company: null,
-    location: {userIpData},
+    location: { userIpData },
     bio: "Hi, I am new here on Flexiyo!",
     account: {
       type: reqBody.accountType,
@@ -195,7 +195,9 @@ const createUserAccount = async (req, res) => {
     }
 
     // If username is not taken, create the user
-    await usersDb.collection(`Users_${userIpData.continent}`).insertOne(userInfo);
+    await usersDb
+      .collection(`Users_${userIpData.continent}`)
+      .insertOne(userInfo);
 
     res.status(200).json({
       message: "User creation initiated!",
@@ -204,6 +206,49 @@ const createUserAccount = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "User creation failed.",
+      error: error.message,
+    });
+  } finally {
+    if (client) await client.close();
+  }
+};
+
+const loginUserAccount = async (req, res) => {
+  const { emailOrUsername, password } = req.body;
+  const client = new MongoClient(mongoURI);
+
+  try {
+    await client.connect();
+    const usersDb = client.db("users");
+    const collections = await usersDb.listCollections().toArray();
+
+    let userFound = null;
+
+    for (const collectionInfo of collections) {
+      const collection = usersDb.collection(collectionInfo.name);
+      userFound = await collection.findOne({
+        $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
+        password: password,
+      });
+
+      if (userFound) {
+        break;
+      }
+    }
+
+    if (userFound) {
+      res.status(200).json({
+        message: "Login successful.",
+        user: userFound,
+      });
+    } else {
+      res.status(401).json({
+        message: "Invalid email/username or password.",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occurred during login.",
       error: error.message,
     });
   } finally {
@@ -257,5 +302,6 @@ module.exports = {
   getAllUsers,
   searchUsers,
   createUserAccount,
+  loginUserAccount,
   deleteUserAccount,
 };
