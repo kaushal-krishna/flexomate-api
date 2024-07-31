@@ -91,6 +91,7 @@ const createUserAccount = async (req, res) => {
       last: reqBody.lastName || null,
     },
     username: reqBody.username,
+    password: reqBody.password,
     email: {
       primary: reqBody.email,
       secondary: null,
