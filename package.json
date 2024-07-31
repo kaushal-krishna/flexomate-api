@@ -4,9 +4,9 @@
   "description": "The Official Flexomate API",
   "main": "index.js",
   "scripts": {
-    "start": "node api/index.js",
-    "dev": "nodemon api/index.js",
-    "vercel-build": "echo hello",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "vercel-build": "node api/index.js",
     "format": "npx prettier . --write",
     "push": "git add . && git commit -m 'Update' && git push origin main"
   },
