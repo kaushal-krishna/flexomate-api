@@ -225,8 +225,7 @@ const loginUserAccount = async (req, res) => {
     let userFound = null;
 
     for (const collection of collections) {
-      const collection = usersDb.collection(collection.name);
-      userFound = await collection.findOne({
+      userFound = await usersDb.collection(collection.name).findOne({
         $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
         password: password,
       });
