@@ -2,21 +2,22 @@
     "version": 2,
     "builds": [
         {
-            "src": "./index.js",
+            "src": "./api/index.js",
             "use": "@vercel/node"
         }
     ],
   "rewrites": [
-    { "source": "/api", "destination": "/" },
-    { "source": "/api/users", "destination": "/" },
-    { "source": "/api/users/search", "destination": "/" },
-    { "source": "/api/users/create_account", "destination": "/" },
-    { "source": "/api/users/login_account", "destination": "/" },
-    { "source": "/api/users/delete_account/:username", "destination": "/" },
-    { "source": "/api/spotify/download/:id", "destination": "/" },
-    { "source": "/api/spotify/top_tracks", "destination": "/" },
-    { "source": "/spotify/get_top_tracks", "destination": "/" },
-    { "source": "/api/mailer/send_signup_email_otp", "destination": "/" },
-    { "source": "/api/mailer/verify_signup_email_otp", "destination": "/" }
+    { "source": "/api", "destination": "/api/index.js" },
+    { "source": "/api/users", "destination": "/api/index.js" },
+    { "source": "/api/users/search", "destination": "/api/index.js" },
+    { "source": "/api/users/create_account", "destination": "/api/index.js" },
+    { "source": "/api/users/login_account", "destination": "/api/index.js" },
+    { "source": "/api/users/delete_account/:username", "destination": "/api/index.js" },
+    { "source": "/api/spotify/download/:id", "destination": "/api/index.js" },
+    { "source": "/api/spotify/top_tracks", "destination": "/api/index.js" },
+    { "source": "/spotify/get_top_tracks", "destination": "/api/index.js" },
+    { "source": "/api/mailer/send_signup_email_otp", "destination": "/api/index.js" },
+    { "source": "/api/mailer/verify_signup_email_otp", "destination": "/api/index.js" }
   ]
+
 }
