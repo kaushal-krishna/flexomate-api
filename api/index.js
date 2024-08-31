@@ -73,7 +73,7 @@ MongoClient.connect(mongoURI, {
         res.status(500).json({ message: "Failed to add continents collections" });
       }
     }); */
-    app.get("/test", (req, res) => {
+    app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Test route is working!" });
 });
 
