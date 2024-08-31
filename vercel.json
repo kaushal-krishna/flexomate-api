@@ -7,16 +7,16 @@
         }
     ],
   "rewrites": [
-    { "source": "/api", "destination": "/index.js" },
-    { "source": "/api/users", "destination": "/index.js" },
-    { "source": "/api/users/search", "destination": "/index.js" },
-    { "source": "/api/users/create_account", "destination": "/index.js" },
-    { "source": "/api/users/login_account", "destination": "/index.js" },
-    { "source": "/api/users/delete_account/:username", "destination": "/index.js" },
-    { "source": "/api/spotify/download/:id", "destination": "/index.js" },
-    { "source": "/api/spotify/top_tracks", "destination": "/index.js" },
-    { "source": "/spotify/get_top_tracks", "destination": "/index.js" },
-    { "source": "/api/mailer/send_signup_email_otp", "destination": "/index.js" },
-    { "source": "/api/mailer/verify_signup_email_otp", "destination": "/index.js" }
+    { "source": "/api", "destination": "/" },
+    { "source": "/api/users", "destination": "/" },
+    { "source": "/api/users/search", "destination": "/" },
+    { "source": "/api/users/create_account", "destination": "/" },
+    { "source": "/api/users/login_account", "destination": "/" },
+    { "source": "/api/users/delete_account/:username", "destination": "/" },
+    { "source": "/api/spotify/download/:id", "destination": "/" },
+    { "source": "/api/spotify/top_tracks", "destination": "/" },
+    { "source": "/spotify/get_top_tracks", "destination": "/" },
+    { "source": "/api/mailer/send_signup_email_otp", "destination": "/" },
+    { "source": "/api/mailer/verify_signup_email_otp", "destination": "/" }
   ]
 }
