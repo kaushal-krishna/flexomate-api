@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 process.env.TZ = "Asia/Kolkata";
 
-app.get("/", async (req, res) => {
+app.get("/api", async (req, res) => {
   let clientIp = req.ip;
 
     // Check if the request is coming from a proxy server
@@ -74,21 +74,21 @@ MongoClient.connect(mongoURI, {
       }
     }); */
 
-    app.get("/users", getAllUsers);
-    app.get("/users/search", searchUsers);
-    app.post("/users/create_account", createUserAccount);
-    app.post("/users/login_account", loginUserAccount);
-    app.get("/users/delete_account/:username", deleteUserAccount);
+    app.get("/api/users", getAllUsers);
+    app.get("/api/users/search", searchUsers);
+    app.post("/api/users/create_account", createUserAccount);
+    app.post("/api/users/login_account", loginUserAccount);
+    app.get("/api/users/delete_account/:username", deleteUserAccount);
 
-    app.get("/spotify/download/:id", spotifyDownloadTrack);
+    app.get("/api/spotify/download/:id", spotifyDownloadTrack);
 
     cron.schedule("0 0 0 * * *", spotifyGetTopTracks);
 
-    app.get("/spotify/top_tracks", spotifyListTopTracks);
+    app.get("/api/spotify/top_tracks", spotifyListTopTracks);
 
     app.get("/spotify/get_top_tracks", spotifyGetTopTracks)
-    app.post("/mailer/send_signup_email_otp", sendSignupEmailOtp);
-    app.post("/mailer/verify_signup_email_otp", verifySignupEmailOtp);
+    app.post("/api/mailer/send_signup_email_otp", sendSignupEmailOtp);
+    app.post("/api/mailer/verify_signup_email_otp", verifySignupEmailOtp);
   })
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
